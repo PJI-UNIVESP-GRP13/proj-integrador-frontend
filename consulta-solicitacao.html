@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta de Solicitação</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Alterna navegação">
+       <span class="navbar-toggler-icon"></span>
+     </button>
+     <!--Imagem da logo na pagina-->
+     <a class="navbar-brand" href="#">
+       <img src="imagem/logowhite.png" alt="" height="125" class="rounded">
+     </a>
+     <!--Link de acesso-->
+     <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+       <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+         <li class="nav-item active font-weight-bold">
+           <a class="nav-link" href="./index.html">Home <span class="sr-only">(Página atual)</span></a>
+         </li>
+       </ul>
+     </div>
+    </nav>
+    <div class="text-center text-muted">
+        <h1 class="display-5">Consulta de Solicitações</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Telefone</th>
+                    <th>E-mail</th>
+                    <th>Endereço</th>
+                    <th>Bairro</th>
+                    <th>CEP</th>
+                    <th>Serviço</th>
+                    <th>Problema</th>
+                </tr>
+            </thead>
+            <tbody id="tabela-dados">
+                <!-- Aqui serão adicionados os dados da consulta -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // Função para verificar se há um token no armazenamento local ao carregar a página
+        document.addEventListener("DOMContentLoaded", function() {
+            const token = localStorage.getItem("token");
+            if (!token) {
+                window.location.href = "login.html";
+            }
+        });
+
+        // Função para buscar os dados do servidor e exibi-los na tabela
+        fetch('/dados')
+            .then(response => response.json())
+            .then(data => {
+                const tabela = document.getElementById('tabela-dados');
+                data.forEach(item => {
+                    const row = tabela.insertRow();
+                    row.innerHTML = `
+                        <td>${item.nome}</td>
+                        <td>${item.telefone}</td>
+                        <td>${item.email}</td>
+                        <td>${item.endereco}</td>
+                        <td>${item.bairro}</td>
+                        <td>${item.cep}</td>
+                        <td>${item.servico}</td>
+                        <td>${item.problema}</td>
+                    `;
+                });
+            })
+            .catch(error => console.error('Erro ao buscar os dados:', error));
+    </script>
+</body>
+</html>

@@ -12,7 +12,7 @@
 </head>
 <body>
     
-    <!--Menu siuperior da pagina classe e stylo-->
+    <!--Menu superior da pagina classe e stylo-->
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Alterna navegação">
     <span class="navbar-toggler-icon"></span>
@@ -99,5 +99,20 @@
     <footer class="p-4 bg-light text-lucida text-center">
         Projeto Alunos UNIVESP Unidade Cerquilho.
     </footer>
+
+    <script>
+      // Função para verificar se há um token no armazenamento local ao carregar a página
+      document.addEventListener("DOMContentLoaded", function() {
+          const token = localStorage.getItem("token");
+          if (!token) {
+              window.location.href = "login.html";
+          }
+      });
+      
+      // Evento de clique no botão "Enviar"
+      document.getElementById("btnEnviar").addEventListener("click", function() {
+          // Aqui você pode adicionar a lógica para enviar os dados do formulário para o servidor
+      });
+      </script>
 </body>
 </html>
