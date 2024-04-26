@@ -72,12 +72,6 @@
 
 <select class="custom-select">
   <option selected>Selecione o serviço</option>
-  <option value="1">Iluminação</option>
-  <option value="2">Manutenção</option>
-  <option value="3">Jardinagem</option>
-  <option value="4">Sinalização</option>
-  <option value="5">Ruas</option>
-  <option value="6">Ouvidoria</option>
 </select>
 
       <div class="my-3">
@@ -101,17 +95,34 @@
     </footer>
 
     <script>
-      // Função para verificar se há um token no armazenamento local ao carregar a página
       document.addEventListener("DOMContentLoaded", function() {
           const token = localStorage.getItem("token");
           if (!token) {
               window.location.href = "login.html";
           }
-      });
-      
-      // Evento de clique no botão "Enviar"
-      document.getElementById("btnEnviar").addEventListener("click", function() {
-          // Aqui você pode adicionar a lógica para enviar os dados do formulário para o servidor
+
+          fetch('http://localhost:8080/services', {
+          method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + token
+            },
+          })
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('Erro ao obter serviços: ' + response.statusText);
+            }
+            return response.json();
+          })
+          .then(data => {
+            const selectElement = document.querySelector('.custom-select');
+            data.forEach(service => {
+              const option = document.createElement('option');
+              option.text = service.service;
+              selectElement.appendChild(option);
+            });
+          })
+          .catch(error => console.error(error));
       });
       </script>
 </body>
