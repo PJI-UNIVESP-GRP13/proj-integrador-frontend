@@ -110,6 +110,7 @@
           data.forEach(service => {
             const option = document.createElement('option');
             option.text = service.service;
+            option.setAttribute('data-id', service.id);
             selectElement.appendChild(option);
           });
         })
@@ -122,13 +123,14 @@
         var neighborhoodInput = document.getElementById('f_bairro');
         var cepInput = document.getElementById('f_cep');
         var serviceSelect = document.getElementById('selectService');
+        var selectedOption = serviceSelect.options[serviceSelect.selectedIndex];
         var problemInput = document.getElementById('exampleFormControlTextarea1');
         var fileInput = document.getElementById('customFile');
 
         var address = addressInput.value;
         var neighborhood = neighborhoodInput.value;
         var zipCode = cepInput.value;
-        var idService = '8c9273e8-4b6c-417f-8355-059013baeb33';
+        var idService = selectedOption.getAttribute('data-id');
         var description = problemInput.value;
         var photo = fileInput.files[0];
 
