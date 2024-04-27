@@ -71,7 +71,7 @@
     </div>
     <!--Escolher arquivo para anexar-->
     <div class="custom-file">
-      <input type="file" class="custom-file-input" id="customFile">
+      <input type="file" class="custom-file-input" id="customFile" onchange="updateFileName()">
       <label class="custom-file-label" for="customFile">Escolha o arquivo</label>
     </div>
     <!--Botão de envio-->
@@ -167,6 +167,13 @@
           .catch(error => console.error(error));
       });
     });
+
+    function updateFileName() {
+      var input = document.getElementById('customFile');
+      var fileName = input.files[0].name;
+      var label = input.nextElementSibling;
+      label.innerText = fileName;
+    }
   </script>
 </body>
 
