@@ -72,7 +72,7 @@
     <!--Escolher arquivo para anexar-->
     <div class="custom-file">
       <input type="file" class="custom-file-input" id="customFile" onchange="updateFileName()">
-      <label class="custom-file-label" for="customFile">Escolha o arquivo</label>
+      <label class="custom-file-label" for="customFile">Coloque uma foto do problema</label>
     </div>
     <!--Botão de envio-->
     <div class="my-3">
@@ -134,6 +134,48 @@
         var description = problemInput.value;
         var photo = fileInput.files[0];
 
+        if (!address) {
+          addressInput.classList.add('is-invalid');
+          alert('Por favor, preencha o endereço.');
+          return;
+        } else {
+          addressInput.classList.remove('is-invalid');
+        }
+
+        if (!neighborhood) {
+          neighborhoodInput.classList.add('is-invalid');
+          alert('Por favor, preencha o bairro.');
+          return;
+        } else {
+          neighborhoodInput.classList.remove('is-invalid');
+        }
+
+        if (!zipCode) {
+          cepInput.classList.add('is-invalid');
+          alert('Por favor, preencha o CEP.');
+          return;
+        } else {
+          cepInput.classList.remove('is-invalid');
+        }
+
+        if (serviceSelect.selectedIndex === 0) {
+          alert('Por favor, selecione um serviço.');
+          return;
+        }
+
+        if (!description) {
+          problemInput.classList.add('is-invalid');
+          alert('Por favor, descreva o problema.');
+          return;
+        } else {
+          problemInput.classList.remove('is-invalid');
+        }
+
+        if (!photo) {
+          alert('Por favor, selecione uma foto.');
+          return;
+        }
+
         // Cria um objeto FormData para a imagem
         var imageFormData = new FormData();
         imageFormData.append('photo', photo);
@@ -165,6 +207,7 @@
               throw new Error('Erro ao enviar a solicitação: ' + response.statusText);
             }
             alert('Solicitação enviada com sucesso!');
+            window.location.href = 'index.html';
           })
           .catch(error => console.error(error));
       });
