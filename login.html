@@ -39,6 +39,11 @@
                 var email = document.getElementById('email').value;
                 var password = document.getElementById('password').value;
 
+                if(email === '' || password === '') {
+                    alert('E-mail e senha são obrigatórios');
+                    return;
+                }
+
                 // Objeto com os dados a serem enviados
                 var data = {
                     email: email,
@@ -65,6 +70,7 @@
                     })
                     .catch(error => {
                         console.error('Erro ao fazer login:', error);
+                        alert('Usuário ou senha inválidos');
                     });
             });
         });
