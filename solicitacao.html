@@ -92,7 +92,7 @@
         window.location.href = "login.html";
       }
 
-      fetch('http://localhost:8080/services', {
+      fetch('https://sleepy-everglades-97802-cdc3033e6535.herokuapp.com/services', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -195,7 +195,7 @@
         formData.append('json_data', JSON.stringify(json_data));
         formData.append('photo', photo);
 
-        fetch('http://localhost:8080/complaints', {
+        fetch('https://sleepy-everglades-97802-cdc3033e6535.herokuapp.com/complaints', {
           method: 'POST',
           headers: {
             'Authorization': 'Bearer ' + token
